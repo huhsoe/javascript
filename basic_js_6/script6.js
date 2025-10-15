@@ -94,12 +94,15 @@ switch (mood) {
     case 'Bad':
         moodMessage = 'Sorry to hear that!';
         break;
+        
     case 'Good', 'Great':
         moodMessage = 'Great to hear that!';
         break;
+        
     case 'Ok', 'Fine':
         moodMessage = 'Hope it will get better!';
         break;
+        
     default:
         moodMessage = 'Tell me what is your mood';
 }
