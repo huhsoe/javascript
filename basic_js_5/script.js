@@ -21,3 +21,11 @@ console.log(isEven(b));
 console.log(isEven(c));
 console.log(isEven(d));
 console.log(isEven(e));
+
+let name = '';
+
+if (!name) {
+    console.log("Hello, Guest!")
+} else {
+    console.log("Hello, " + name + "!")
+}
