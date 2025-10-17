@@ -9,8 +9,8 @@ if (num > 0) {
 };
 
 
-let height = prompt ('Your height (m):');
-let weight = prompt ('Your weight (kg):');
+let height = Number(prompt('Your height (m):'));
+let weight = Number(prompt ('Your weight (kg):'));
 let BMI = Math.round(weight / (height**2));
 
 console.log (BMI);
@@ -95,14 +95,16 @@ switch (mood) {
         moodMessage = 'Sorry to hear that!';
         break;
         
-    case 'Good', 'Great':
+    case 'Good':
+    case 'Great':
         moodMessage = 'Great to hear that!';
         break;
         
-    case 'Ok', 'Fine':
+    case 'Ok':
+    case 'Fine':
         moodMessage = 'Hope it will get better!';
         break;
-        
+
     default:
         moodMessage = 'Tell me what is your mood';
 }

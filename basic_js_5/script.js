@@ -14,7 +14,7 @@ const d = 5;
 const e = 6;
 
 function isEven (number) {
-    return number % 2 === 0 // Если число делится на 2 без остатка (остаток 0), то оно четное (true)
+    return number % 2 === 0; // Если число делится на 2 без остатка (остаток 0), то оно четное (true)
 };
 
 console.log(isEven(b));
@@ -22,7 +22,7 @@ console.log(isEven(c));
 console.log(isEven(d));
 console.log(isEven(e));
 
-let name = '';
+const name = '';
 
 if (!name) {
     console.log("Hello, Guest!")
