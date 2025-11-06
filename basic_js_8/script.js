@@ -11,3 +11,10 @@ console.log(`Hello, ${userName}!`);
 
 
 
+const firstName = 'John';
+const lastName = 'Doe';
+const occupation = 'software developer';
+
+console.log(`Hello, my name is ${firstName} ${lastName}. I'm a ${occupation}.`);
+
+
