@@ -33,14 +33,27 @@ job = 'doctor';
 
 console.log(job);
 
-const name = 'Mary';
+/*const name = 'Mary';
 name = 'Sue';
 
-console.log(name);
+console.log(name); из-за намеренной ошибки тут не могу дальше вывести в консоль, поэтому вот так, при const не можем переопределить переменную  */
 
 
-let arrLet = [1, 2, 3, 4];
+let arrLet = [1, 2, 3];
 const arrConst = [2, 5, 7, 9];
+
+arrLet.push(4);
+arrConst.push(11);
+
+arrLet.pop(2);
+arrConst.pop(2);
+
+arrLet.reverse();
+arrConst.reverse();
+
+arrLet = [2, 3, 4, 5];
+/* arrConst = [2, 2, 2]; объяснение: let можно переопределить, const - нет, однако менять массив можно в обоих случаях. в случае с const нельзя изменить саму ссылку на ячейку (переопределить), но можно изменить содержимое по той же ссылке*/
+
 
 console.log(arrLet);
 console.log(arrConst);
