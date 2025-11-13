@@ -6,5 +6,54 @@ function average ( ...numbers) {
     return sum / numbers.length;
 }
 
+console.log(average(1, 2, 3, 4, 5));
 
+
+function getUserInfo (user) {
+    const { name, age, country } = user;
+    return `User: ${name}, Age: ${age}, Country: ${country}`;
+}
+
+const user1 = {
+    name: 'Mary',
+    age: 23,
+    country: 'Russia'
+};
+
+console.log(getUserInfo(user1));
+
+
+
+const danceSchool = {
+    name: 'Twice',
+    founded: 2020,
+    staff: {
+        administration: {
+            director: 'Park Jinyoung',
+            managers: ['John Smith', 'Mary Sue']
+        },
+        teachers: ['Hirai Momo', 'Park Jihyo']
+    },
+    styles: ['k-pop', 'jazz-funk', ' hip-hop'],
+    adress: {
+        country: 'South Korea',
+        city: 'Seoul',
+        street: 'Once st'
+    }
+};
+
+const { name, founded } = danceSchool;
+console.log(`Dance school ${name} was founded in ${founded}`);
+
+const { adress: {country, city, street } } = danceSchool;
+console.log(`The school is located in ${city}, ${country}, on ${street}`);
+
+const { styles: [style1, ...rest] } = danceSchool;
+console.log(`There are many styles in the school, for example: ${style1}, ${rest}`);
+
+const { staff: { administration: {director: schoolDirector} } } = danceSchool;
+console.log(`The school is directed by ${schoolDirector}`);
+
+const { staff: { teachers: [teacher1, teacher2] } } = danceSchool;
+console.log(`Most prominent teachers of the school are ${teacher1} and ${teacher2}`);
 
