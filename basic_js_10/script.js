@@ -57,3 +57,21 @@ console.log(`The school is directed by ${schoolDirector}`);
 const { staff: { teachers: [teacher1, teacher2] } } = danceSchool;
 console.log(`Most prominent teachers of the school are ${teacher1} and ${teacher2}`);
 
+
+const oldArr = [1, 2, 3, 4];
+const newArr = [-1, 0, ...oldArr, 5, 6];
+
+console.log(newArr);
+
+
+
+function removeProperty({normalProperty, ...rest}) {
+    return normalProperty;
+}
+
+const someData = {
+    normalProperty: 'user1',
+    password: 12345
+};
+
+console.log(removeProperty(someData)); // если честно я вообще не поняла что нужно сделать в этом задании
