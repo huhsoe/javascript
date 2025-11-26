@@ -65,13 +65,16 @@ console.log(newArr);
 
 
 
-function removeProperty({normalProperty, ...rest}) {
-    return normalProperty;
+function removeProperty(obj, toRemove) {
+    const {[toRemove]: removed, ...rest } = obj;
+    return rest;
 }
 
 const someData = {
-    normalProperty: 'user1',
-    password: 12345
+    password: 12345,
+    name: 'user1',
+    age: 20
 };
 
-console.log(removeProperty(someData)); // если честно я вообще не поняла что нужно сделать в этом задании
+const result = removeProperty(someData, 'password');
+console.log(result);
