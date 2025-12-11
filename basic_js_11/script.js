@@ -53,3 +53,39 @@ function formatPhoneNumber(numbers) {
 
 console.log(formatPhoneNumber(81234567890));
 console.log(formatPhoneNumber(812345));
+
+
+const task4 = '4th task';
+console.log(task4);
+
+function findMinAndMaxNum (nums) {
+    if (nums.length === 0) {
+        return ' ';
+    }
+    
+    return {
+        min: Math.min(...nums),
+        max: Math.max(...nums)
+    };
+}
+
+console.log(findMinAndMaxNum([3, 2, 5, 6, 7, 9, 1])); // как я поняла из задания, должен быть принят сразу массив, надеюсь верно
+
+const task5 = '5th task';
+console.log(task5);
+
+function newSortedArr (initialArr) {
+    const initialArrCopy = [...initialArr];
+    
+    if (initialArrCopy.length === 0) {
+        return ' ';
+    }
+
+    return [...initialArrCopy].sort((a, b) => a - b);
+}
+
+const initialArr = [8, 2, 6, 4, 0]
+
+console.log(newSortedArr(initialArr));
+
+console.log(initialArr);
