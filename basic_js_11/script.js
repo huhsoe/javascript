@@ -19,9 +19,9 @@ console.log(task2);
 
 function findShortestWord(sentence) {
     if (!sentence || sentence.trim().length === 0) {
-        return '';
+        return 'undefined';
     }
-    const words = sentence.trim().split(' ');
+    const words = sentence.trim().split(' ').filter(Boolean);
 
     let shortestIndex = 0;
     for (let i = 1; i < words.length; i++) {
@@ -60,7 +60,7 @@ console.log(task4);
 
 function findMinAndMaxNum (nums) {
     if (nums.length === 0) {
-        return ' ';
+        return 'undefined';
     }
     
     return {
@@ -78,7 +78,7 @@ function newSortedArr (initialArr) {
     const initialArrCopy = [...initialArr];
     
     if (initialArrCopy.length === 0) {
-        return ' ';
+        return 'undefined';
     }
 
     return [...initialArrCopy].sort((a, b) => a - b);
