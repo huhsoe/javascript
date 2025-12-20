@@ -47,13 +47,19 @@ const total = price['apple'] + price["banana"] + price.orange;
 function calculateTotal(items) {
   return items.reduce(function(total, item) {return total + item.price; }, 0); }*/
 
-const items = ['apple', 'banana', 'orange'];
-const price = { apple: 1, banana: 2, orange: 3 };
-const total = price.apple + price.banana + price.orange;
+
+const items = [
+  {name: 'apple', price: 1},
+  {name: 'banana', price: 2},
+  {name: 'orange', price: 3}
+];
+const total = calculateTotal(items);
 
 function calculateTotal(items) {
-  return items.reduce((total, item) => total + item.price, 0); 
+  return items.reduce((total, item) => total + item.price, 0);
 }
+
+console.log(total);
 
 
 // 4 задание
@@ -68,7 +74,7 @@ function validateForm(formData) {
     return;
   }
 
-  const emailRegex = /^[^s@]+@[^s@]+.[^s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!formData.email || !emailRegex.test(formData.email)) {
     console.log('Wrong email format');
     return;
