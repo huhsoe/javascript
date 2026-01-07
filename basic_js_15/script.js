@@ -25,8 +25,17 @@ document.body.appendChild(newParagraph);
 
 //4. Напиши функцию, которая удаляет элемент с указанным ID из документа;
 
-const paragraphToRemove = document.getElementById('new-paragraph');
-paragraphToRemove.parentNode.removeChild(paragraphToRemove);
+function removeElementById(id) {
+    const elementToRemove = document.getElementById(id);
+    if (elementToRemove) {
+        elementToRemove.parentNode.removeChild(elementToRemove);
+    } else {
+        console.warn('Элемент с id ${id} не найден');
+    }
+    console.log('Element is removed');
+}
+
+removeElementById('to-remove');
 
 //5. Измени атрибут ссылки на новый URL и выведи его значение в консоль;
 
