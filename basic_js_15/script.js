@@ -30,7 +30,7 @@ function removeElementById(id) {
     if (elementToRemove) {
         elementToRemove.parentNode.removeChild(elementToRemove);
     } else {
-        console.warn('Элемент с id ${id} не найден');
+        console.warn(`Элемент с id ${id} не найден`);
     }
     console.log('Element is removed');
 }
