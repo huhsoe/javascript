@@ -19,20 +19,6 @@ body {
     text-align: center;
 }
 
-.testTitle::before {
-    content: url(./images/mathDoodle2.svg);
-    position: absolute;
-    right: 100px;
-    top: 200px;
-}
-
-.testTitle::after {
-    content: url(./images/mathDoodle1.svg);
-    position: absolute;
-    left: 100px;
-    top: 200px;
-}
-
 #startButton {
     background-color: white;
     color: #15157e;
@@ -47,5 +33,25 @@ body {
     margin-top: 100px;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+
+.testArea, .questionArea, .resultArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.questionArea, .resultArea {
+    display: none;
+}
+
+.questionArea .options .optionsList {
+    display: flex;
+    flex-direction: column;
+}
+
+.questionArea .options #secondQuestion, #thirdQuestion {
+    display: none;
 }
 
