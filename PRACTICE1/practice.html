@@ -17,9 +17,9 @@
         </div>
         <div class="questionArea" id="questionArea">
             <h2 id="questionNumber">Question 1</h2>
-            <div class="questionText" id="questionText"> 13 + 88 </div>
             <div class="options" id="optionsContainer">
                 <div id="firstQuestion" class="optionsList">
+                    <h3 class="questionText" id="questionText"> 13 + 88 </h3>
                     <input type="radio" name="q1" value="0">
                     вариант 1
                     <input type="radio" name="q1" value="1">
@@ -28,6 +28,7 @@
                     вариант 3
                 </div>
                 <div id="secondQuestion" class="optionsList">
+                    <h3 class="questionText" id="questionText"> 65 - 8 </h3>
                     <input type="radio" name="q2" value="0">
                     вариант 1
                     <input type="radio" name="q2" value="0">
@@ -36,6 +37,7 @@
                      вариант 3
                 </div>
                 <div id="thirdQuestion" class="optionsList">
+                    <h3 class="questionText" id="questionText"> 58 + 23 </h3>
                     <input type="radio" name="q3" value="1">
                     вариант 1
                     <input type="radio" name="q3" value="0">
@@ -46,7 +48,7 @@
             </div>
             <button id="submitAndCheckRadioButton" onclick="checkRadioAnswer()">Submit</button>
             <p id="result"></p>
-            <buttonAfterAnswer id="buttonAfterAnswer"></button>
+            <button id="nextQuestion" onclick="nextQuestion()">Next question</button>
         </div>
     </div>
     <script src="./practiceScript.js"></script>

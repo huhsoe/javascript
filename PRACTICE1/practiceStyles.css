@@ -51,7 +51,13 @@ body {
     flex-direction: column;
 }
 
-.questionArea .options #secondQuestion, #thirdQuestion {
+#secondQuestion, #thirdQuestion {
     display: none;
 }
+
+#nextQuestion {
+    display: none;
+}
+
+
 
