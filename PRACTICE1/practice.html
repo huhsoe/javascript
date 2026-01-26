@@ -46,9 +46,23 @@
                     вариант 3
                 </div>
             </div>
-            <button id="submitAndCheckRadioButton" onclick="checkRadioAnswer()">Submit</button>
+            <div class="writtenAnswerContainer" id="writtenAnswerContainer">
+                <div id="fourthQuestion" class="writtenAnswerQuestion">
+                    <h3 class="questionText" id="questionText"> Cameron took 4 tests, and his scores were as follows: 100, 60, 80, and 30. Cameron took another test that was scored x. The mean score of the 5 tests he took is 72. What is the value of x? </h3>
+                    <input type="text" id="answerBox">
+                </div>
+            </div>
+            <button id="submitAndCheckButton" onclick="checkAnswer()">Submit</button>
             <p id="result"></p>
             <button id="nextQuestion" onclick="nextQuestion()">Next question</button>
+            <button id="finishButton" onclick="finishTest()">Finish the Test</button>
+        </div>
+        <div class="finishContainer" id="finishContainer">
+            <div class="finishTextAndScore">
+                <h2 class="finishText" id="finishText">Congratulations! Your score is:</h2>
+                <p id="finalScore"></p>
+            </div>
+            <button id="restartButton">Start again</button>
         </div>
     </div>
     <script src="./practiceScript.js"></script>
