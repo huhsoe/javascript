@@ -13,56 +13,50 @@
     <div class="container">
         <div class="testArea" id="testArea">
             <h1 class="testTitle" id="testTitle">Hi! This is a quick math test because I couldn't think of another topic. Enjoy...I guess</h1>
-            <button id="startButton">Start the test</button>
+            <button id="startButton" class="buttonBig">Start the test</button>
         </div>
         <div class="questionArea" id="questionArea">
             <h2 id="questionNumber">Question 1</h2>
             <div class="options" id="optionsContainer">
-                <div id="firstQuestion" class="optionsList">
-                    <h3 class="questionText" id="questionText"> 13 + 88 </h3>
-                    <input type="radio" name="q1" value="0">
-                    вариант 1
-                    <input type="radio" name="q1" value="1">
-                    вариант 2
-                    <input type="radio" name="q1" value="0">
-                    вариант 3
+                <div id="question1" class="optionsList">
+                    <h3 class="questionText" id="questionText"> What is three-fifths of <span class="underlined">100</span>? </h3>
+                    <label class="radio"><input type="radio" name="q1" value="0">7</label>
+                    <label class="radio"><input type="radio" name="q1" value="1">60</label>
+                    <label class="radio"><input type="radio" name="q1" value="0">25</label>
                 </div>
-                <div id="secondQuestion" class="optionsList">
-                    <h3 class="questionText" id="questionText"> 65 - 8 </h3>
-                    <input type="radio" name="q2" value="0">
-                    вариант 1
-                    <input type="radio" name="q2" value="0">
-                    вариант 2
-                    <input type="radio" name="q2" value="1">
-                     вариант 3
+                <div id="question2" class="optionsList">
+                    <h3 class="questionText" id="questionText"> If x<sup>2</sup>=169, what is the value of <span class="underlined">x</span>? </h3>
+                    <label class="radio"><input type="radio" name="q2" value="0">338</label>
+                    <label class="radio"><input type="radio" name="q2" value="0">169</label>
+                    <label class="radio"><input type="radio" name="q2" value="1">13</label>
                 </div>
-                <div id="thirdQuestion" class="optionsList">
-                    <h3 class="questionText" id="questionText"> 58 + 23 </h3>
-                    <input type="radio" name="q3" value="1">
-                    вариант 1
-                    <input type="radio" name="q3" value="0">
-                    вариант 2
-                    <input type="radio" name="q3" value="0">
-                    вариант 3
+                <div id="question3" class="optionsList">
+                    <h3 class="questionText" id="questionText"> What is <span class="underlined">7%</span> equal to? </h3>
+                    <label class="radio"><input type="radio" name="q3" value="1">0.07</label>
+                    <label class="radio"><input type="radio" name="q3" value="0">0.007</label>
+                    <label class="radio"><input type="radio" name="q3" value="0">0.7</label>
                 </div>
             </div>
             <div class="writtenAnswerContainer" id="writtenAnswerContainer">
-                <div id="fourthQuestion" class="writtenAnswerQuestion">
-                    <h3 class="questionText" id="questionText"> Cameron took 4 tests, and his scores were as follows: 100, 60, 80, and 30. Cameron took another test that was scored x. The mean score of the 5 tests he took is 72. What is the value of x? </h3>
-                    <input type="text" id="answerBox">
+                <div id="question4" class="writtenAnswerQuestion">
+                    <h3 class="questionText" id="questionText"> Cameron took 4 tests, and his scores were as follows: 100, 60, 80, and 30.
+                        <br>Cameron took another test that was scored x.
+                        <br>The mean score of the 5 tests he took is 72.
+                        <br>What is the value of x? </h3>
+                    <input type="text" id="answerBox" class="answerBox">
                 </div>
             </div>
-            <button id="submitAndCheckButton" onclick="checkAnswer()">Submit</button>
+            <button id="submitAndCheckButton" class="buttonSmall">Submit</button>
             <p id="result"></p>
-            <button id="nextButton" onclick="nextQuestion()">Next question</button>
-            <button id="finishButton" onclick="finishTest()">Finish the Test</button>
+            <button id="nextButton" class="buttonSmall">Next question</button>
+            <button id="finishButton" class="buttonSmall">Finish the Test</button>
         </div>
         <div class="finishContainer" id="finishContainer">
             <div class="finishTextAndScore">
                 <h2 class="finishText" id="finishText">Congratulations! Your score is:</h2>
-                <p id="finalScore"></p>
+                <p id="finalScore" class="finalScore"></p>
             </div>
-            <button id="restartButton">Start again</button>
+            <button id="restartButton" class="buttonBig">Start again</button>
         </div>
     </div>
     <script src="./practiceScript.js"></script>

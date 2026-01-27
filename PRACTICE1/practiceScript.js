@@ -14,10 +14,10 @@ const nextButton = document.getElementById('nextButton');
 const restartButton = document.getElementById('restartButton');
 const scoreDisplay = document.getElementById('scoreDisplay');
 const finishArea = document.getElementById('finishContainer');
-const question1 = document.getElementById('firstQuestion');
-const question2 = document.getElementById('secondQuestion');
-const question3 = document.getElementById('thirdQuestion');
-const question4 = document.getElementById('fourthQuestion');
+const question1 = document.getElementById('question1');
+const question2 = document.getElementById('question2');
+const question3 = document.getElementById('question3');
+const question4 = document.getElementById('question4');
 const resultElement = document.getElementById('result');
 const questionNumberElement = document.getElementById('questionNumber');
 const result = document.getElementById('result');
@@ -30,6 +30,9 @@ let totalScore = 0;
 let currentQuestion = null;
 
 startButton.addEventListener('click', startTest);
+submitAndCheckButton.addEventListener('click', checkAnswer);
+nextButton.addEventListener('click', nextQuestion);
+finishButton.addEventListener('click', finishTest);
 restartButton.addEventListener('click', restartTest);
 
 function startTest() {
@@ -75,9 +78,15 @@ function checkAnswer() {
             }
         }
     
+        questionArea.appendChild(resultElement);
+        resultElement.style.textAlign = 'center';
+        resultElement.style.marginTop = '20px';
+
         if (selectedValue === null) {
             resultElement.textContent = "Please, answer the question";
             resultElement.style.color = "orange";
+            resultElement.style.fontWeight = '800';
+            resultElement.style.fontSize = '18px';
             return;
         } 
         
@@ -86,6 +95,8 @@ function checkAnswer() {
         if (isCorrect) { 
             resultElement.textContent = "Correct!";
             resultElement.style.color = "green";
+            resultElement.style.fontWeight = '800';
+            resultElement.style.fontSize = '18px';
             submitAndCheckButton.style.display = 'none';
             nextButton.style.display = 'block';
             totalScore = totalScore+=1; 
@@ -93,6 +104,8 @@ function checkAnswer() {
         } else {
             resultElement.textContent = "Wrong, please, try again next time";
             resultElement.style.color = "red";
+            resultElement.style.fontWeight = '800';
+            resultElement.style.fontSize = '18px';
             submitAndCheckButton.style.display = 'none';
             nextButton.style.display = 'block';
         }
@@ -109,6 +122,8 @@ function checkAnswer() {
         if (isCorrect) {
             resultElement.textContent = "Correct!";
             resultElement.style.color = "green";
+            resultElement.style.fontWeight = '800';
+            resultElement.style.fontSize = '18px';
             submitAndCheckButton.style.display = 'none';
             nextButton.style.display = 'none';
             finishButton.style.display = 'block';
@@ -118,6 +133,8 @@ function checkAnswer() {
         } else {
             resultElement.textContent = "Wrong, please, try again next time";
             resultElement.style.color = "red";
+            resultElement.style.fontWeight = '800';
+            resultElement.style.fontSize = '18px';
             submitAndCheckButton.style.display = 'none';
         }
     }
@@ -164,7 +181,9 @@ function finishTest() {
     finishArea.style.display = 'flex';
     restartButton.style.display = 'block';
     finalScore.textContent = totalScore + '/4';
-    finalScore.style.fontSize = '22px;'
+    finalScore.style.fontSize = '35px';
+    finalScore.style.fontWeight = '800';
+    finalScore.style.color = 'green';
 }
 
 function restartTest() {

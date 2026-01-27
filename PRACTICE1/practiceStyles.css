@@ -9,21 +9,25 @@ body {
     background-repeat: no-repeat;
 }
 
+h1, h2, h3 {
+    color: rgb(4, 4, 60);
+}
+
 .container {
     max-width: 600px;
     width: 100%;
-    margin: 100px auto;
+    margin: 129px auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
 }
 
-#startButton {
-    background-color: white;
+.buttonBig {
+    background-color: rgba(226, 226, 226, 0.586);
     color: #15157e;
     border: 2px solid #15157e;
-    border-radius: 11px;
+    border-radius: 31px;
     width: 100%;
     max-width: 200px;
     text-decoration: none;
@@ -31,10 +35,51 @@ body {
     font-size: 21px;
     text-align: center;
     margin-top: 100px;
+    padding: 10px 15px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
+.questionArea .buttonSmall {
+    background-color: rgba(226, 226, 226, 0.586);
+    color: #15157e;
+    border: 2px solid #15157e;
+    border-radius: 11px;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.questionArea .questionText {
+    width: 100vw;
+    background-color: rgba(140, 203, 255, 0.421);
+}
+
+.questionArea .options .optionsList .radio {
+  cursor: pointer;
+  margin: 10px;
+  accent-color: rgb(171, 171, 255);
+}
+
+.questionArea .options .optionsList .questionText .underlined {
+    text-decoration-line: underline;
+    font-weight: bold;
+}
+
+.questionArea .writtenAnswerContainer .writtenAnswerQuestion .answerBox {
+    border: 2px solid rgb(10, 10, 90);
+    border-radius: 11px;
+    height: 30px;
+    width: 150px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
 .testArea, .questionArea, .resultArea, .writtenAnswerQuestion, .finishTextAndScore, .finishContainer {
     display: flex;
@@ -57,4 +102,9 @@ body {
 
 #nextQuestion, #finishButton {
     display: none;
+}
+
+
+.finishContainer .finishTextAndScore .finishText {
+    margin-bottom: 80px;
 }
