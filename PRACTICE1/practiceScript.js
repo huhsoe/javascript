@@ -1,5 +1,5 @@
 const startButton = document.getElementById('startButton');
-const testArea = document.querySelector('.testArea');
+const testArea = document.getElementById('testArea');
 const questionArea = document.getElementById('questionArea');
 const resultArea = document.getElementById('resultArea');
 const questionNumber = document.getElementById('questionNumber');
@@ -11,7 +11,6 @@ const inputContainer = document.getElementById('inputContainer');
 const textAnswer = document.getElementById('textAnswer');
 const feedback = document.getElementById('feedback');
 const nextButton = document.getElementById('nextButton');
-const finishButton = document.getElementById('finishButton');
 const restartButton = document.getElementById('restartButton');
 const scoreDisplay = document.getElementById('scoreDisplay');
 const finishArea = document.getElementById('finishContainer');
@@ -19,6 +18,13 @@ const question1 = document.getElementById('firstQuestion');
 const question2 = document.getElementById('secondQuestion');
 const question3 = document.getElementById('thirdQuestion');
 const question4 = document.getElementById('fourthQuestion');
+const resultElement = document.getElementById('result');
+const questionNumberElement = document.getElementById('questionNumber');
+const result = document.getElementById('result');
+const inputTextAnswer = document.querySelector('#fourthQuestion input[type="text"]');
+const finishButton = document.getElementById('finishButton');
+const finishText = document.getElementById('finishText');
+const finalScore = document.getElementById('finalScore');
 
 let totalScore = 0;
 let currentQuestion = null;
@@ -31,14 +37,17 @@ function startTest() {
     testArea.style.display = 'none';
     finishArea.style.display = 'none';
     questionArea.style.display = 'flex';
+    submitAndCheckButton.style.display = 'block';
+    nextButton.style.display = 'none';
     question1.style.display = 'flex';
-    submitAndCheckButton = 'block';
-    nextButton = 'none';
-    resultArea = 'none';
+    question2.style.display = 'none';
+    question3.style.display = 'none';
+    question4.style.display = 'none';
+    questionNumberElement.textContent = 'Question 1';
 }
 
 function checkAnswer() {
-    
+
    if (question1.style.display === 'flex' || question1.style.display === '') {
         currentQuestion = question1;
     } else if (question2.style.display === 'flex') {
@@ -53,12 +62,8 @@ function checkAnswer() {
         console.error('No active question found');
         return;
     }
-    
-    const radioButtons = currentQuestion.querySelectorAll('input[type="radio"]');
-    const resultElement = document.getElementById('result');
-    const submitAndCheckButton = document.getElementById('submitAndCheckButton');
-    const nextQuestion = document.getElementById('nextQuestion');
 
+    const radioButtons = currentQuestion.querySelectorAll('input[type="radio"]');
     let selectedValue = null;
     let isCorrect = false;
     
@@ -69,7 +74,6 @@ function checkAnswer() {
                 break;
             }
         }
-    
     
         if (selectedValue === null) {
             resultElement.textContent = "Please, answer the question";
@@ -83,14 +87,14 @@ function checkAnswer() {
             resultElement.textContent = "Correct!";
             resultElement.style.color = "green";
             submitAndCheckButton.style.display = 'none';
-            nextQuestion.style.display = 'block';
+            nextButton.style.display = 'block';
             totalScore = totalScore+=1; 
             console.log(`Total for now: ${totalScore}`);
         } else {
             resultElement.textContent = "Wrong, please, try again next time";
             resultElement.style.color = "red";
             submitAndCheckButton.style.display = 'none';
-            nextQuestion.style.display = 'block';
+            nextButton.style.display = 'block';
         }
     }
 
@@ -98,7 +102,7 @@ function checkAnswer() {
         const correctAnswer = "90";
         const userAnswer = document.getElementById('answerBox').value;
         finishButton.style.display = 'block';
-        nextQuestion.style.display = 'none';
+        nextButton.style.display = 'none';
 
         isCorrect = (userAnswer === correctAnswer);
         
@@ -106,7 +110,7 @@ function checkAnswer() {
             resultElement.textContent = "Correct!";
             resultElement.style.color = "green";
             submitAndCheckButton.style.display = 'none';
-            nextQuestion.style.display = 'none';
+            nextButton.style.display = 'none';
             finishButton.style.display = 'block';
             totalScore += 1;
             console.log(`Total for now: ${totalScore}`);
@@ -122,13 +126,7 @@ function checkAnswer() {
 
 function nextQuestion() {
     console.log('Changing questions');
-    const nextQuestion = document.getElementById('nextQuestion');
-    const submitAndCheckButton = document.getElementById('submitAndCheckButton'); 
-    const questionNumberElement = document.getElementById('questionNumber');
-    const result = document.getElementById('result');
-    const inputTextAnswer = document.querySelector('#fourthQuestion input[type="text"]');
     result.textContent = '';
-    
 
     if (question1.style.display === 'flex' || question1.style.display === '') {
         question1.style.display = 'none';
@@ -136,7 +134,7 @@ function nextQuestion() {
         question3.style.display = 'none';
         question4.style.display = 'none';
         questionNumberElement.textContent = 'Question 2';
-        nextQuestion.style.display = 'none';
+        nextButton.style.display = 'none';
         submitAndCheckButton.style.display = 'block';
 
     } 
@@ -146,7 +144,7 @@ function nextQuestion() {
         question3.style.display = 'flex';
         question4.style.display = 'none';
         questionNumberElement.textContent = 'Question 3';
-        nextQuestion.style.display = 'none';
+        nextButton.style.display = 'none';
         submitAndCheckButton.style.display = 'block';
     }
     else if (question3.style.display === 'flex') {
@@ -155,15 +153,12 @@ function nextQuestion() {
         question3.style.display = 'none';
         question4.style.display = 'flex';
         questionNumberElement.textContent = 'Question 4';
-        nextQuestion.style.display = 'none';
+        nextButton.style.display = 'none';
         submitAndCheckButton.style.display = 'block';
     }
 }
 
 function finishTest() {
-    const finishText = document.getElementById('finishText');
-    const finalScore = document.getElementById('finalScore');
-
     testArea.style.display = 'none';
     questionArea.style.display = 'none';
     finishArea.style.display = 'flex';
@@ -181,25 +176,21 @@ function restartTest() {
     const answerBox = document.getElementById('answerBox');
     if (answerBox) answerBox.value = '';
 
-    testArea.style.display = 'flex';
-    startButton = 'block';
-
     questionArea.style.display = 'none';
     finishArea.style.display = 'none';
-    question1.style.display = 'none';
-    question2.style.display = 'none';
-    question3.style.display = 'none';
-    question4.style.display = 'none';
 
     submitAndCheckButton.style.display = 'none';
     nextButton.style.display = 'none';
     finishButton.style.display = 'none';
     
+    testArea.style.display = 'flex';
+    startButton.style.display = 'block';
+
     const resultElement = document.getElementById('result');
     resultElement.textContent = '';
 
-    if (scoreDisplay) scoreDisplay.style.display = 'none';
-
+    if (scoreDisplay) scoreDisplay.style.display = null;
+    currentQuestion = question1;
     
     console.log('Тест сброшен. Счет: 0');
 
