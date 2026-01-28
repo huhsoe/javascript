@@ -1,33 +1,23 @@
 const startButton = document.getElementById('startButton');
 const testArea = document.getElementById('testArea');
 const questionArea = document.getElementById('questionArea');
-const resultArea = document.getElementById('resultArea');
 const questionNumber = document.getElementById('questionNumber');
-const questionText = document.getElementById('questionText');
-const optionsContainer = document.getElementById('optionsContainer');
 const submitAndCheckButton = document.getElementById('submitAndCheckButton');
-const buttonAfterAnswer = document.getElementById('buttonAfterAnswer');
-const inputContainer = document.getElementById('inputContainer');
-const textAnswer = document.getElementById('textAnswer');
-const feedback = document.getElementById('feedback');
 const nextButton = document.getElementById('nextButton');
 const restartButton = document.getElementById('restartButton');
 const scoreDisplay = document.getElementById('scoreDisplay');
-const finishArea = document.getElementById('finishContainer');
 const question1 = document.getElementById('question1');
 const question2 = document.getElementById('question2');
 const question3 = document.getElementById('question3');
 const question4 = document.getElementById('question4');
 const resultElement = document.getElementById('result');
-const questionNumberElement = document.getElementById('questionNumber');
-const result = document.getElementById('result');
-const inputTextAnswer = document.querySelector('#fourthQuestion input[type="text"]');
 const finishButton = document.getElementById('finishButton');
-const finishText = document.getElementById('finishText');
 const finalScore = document.getElementById('finalScore');
+const finishArea = document.getElementById('finishContainer');
 
 let totalScore = 0;
 let currentQuestion = null;
+let currentQuestionIndex = 0;
 
 startButton.addEventListener('click', startTest);
 submitAndCheckButton.addEventListener('click', checkAnswer);
@@ -46,7 +36,7 @@ function startTest() {
     question2.style.display = 'none';
     question3.style.display = 'none';
     question4.style.display = 'none';
-    questionNumberElement.textContent = 'Question 1';
+    questionNumber.textContent = 'Question 1';
 }
 
 function checkAnswer() {
@@ -69,6 +59,33 @@ function checkAnswer() {
     const radioButtons = currentQuestion.querySelectorAll('input[type="radio"]');
     let selectedValue = null;
     let isCorrect = false;
+
+    function isNotAnswered(resultElement) {
+        resultElement.textContent = "Please, answer the question";
+        resultElement.style.color = "orange";
+        resultElement.style.fontWeight = '800';
+        resultElement.style.fontSize = '18px';
+        return true; 
+    }
+
+    function isRight(resultElement) {
+        resultElement.textContent = "Correct!";
+        resultElement.style.color = "green";
+        resultElement.style.fontWeight = '800';
+        resultElement.style.fontSize = '18px';
+        submitAndCheckButton.style.display = 'none';
+        totalScore = totalScore+=1;
+        return true;
+    }
+
+    function isWrong(resultElement) {
+        resultElement.textContent = "Wrong, please, try again next time";
+        resultElement.style.color = "red";
+        resultElement.style.fontWeight = '800';
+        resultElement.style.fontSize = '18px';
+        submitAndCheckButton.style.display = 'none';
+        return true;
+    }
     
     if (currentQuestion !== question4) {
         for (const radioButton of radioButtons) {
@@ -82,31 +99,20 @@ function checkAnswer() {
         resultElement.style.textAlign = 'center';
         resultElement.style.marginTop = '20px';
 
+
         if (selectedValue === null) {
-            resultElement.textContent = "Please, answer the question";
-            resultElement.style.color = "orange";
-            resultElement.style.fontWeight = '800';
-            resultElement.style.fontSize = '18px';
+            isNotAnswered(resultElement);
             return;
         } 
         
         isCorrect = (selectedValue === "1");
 
         if (isCorrect) { 
-            resultElement.textContent = "Correct!";
-            resultElement.style.color = "green";
-            resultElement.style.fontWeight = '800';
-            resultElement.style.fontSize = '18px';
-            submitAndCheckButton.style.display = 'none';
+            isRight(resultElement);
             nextButton.style.display = 'block';
-            totalScore = totalScore+=1; 
             console.log(`Total for now: ${totalScore}`);
         } else {
-            resultElement.textContent = "Wrong, please, try again next time";
-            resultElement.style.color = "red";
-            resultElement.style.fontWeight = '800';
-            resultElement.style.fontSize = '18px';
-            submitAndCheckButton.style.display = 'none';
+            isWrong(resultElement);
             nextButton.style.display = 'block';
         }
     }
@@ -114,64 +120,50 @@ function checkAnswer() {
     if (currentQuestion === question4) {
         const correctAnswer = "90";
         const userAnswer = document.getElementById('answerBox').value;
-        finishButton.style.display = 'block';
+        
+
+        if (userAnswer === '') {
+            isNotAnswered(resultElement);
+            return;
+        }
+
+        finishButton.style.display = 'none';
         nextButton.style.display = 'none';
+        submitAndCheckButton.style.display = 'block';
 
         isCorrect = (userAnswer === correctAnswer);
         
         if (isCorrect) {
-            resultElement.textContent = "Correct!";
-            resultElement.style.color = "green";
-            resultElement.style.fontWeight = '800';
-            resultElement.style.fontSize = '18px';
-            submitAndCheckButton.style.display = 'none';
+            isRight(resultElement);
             nextButton.style.display = 'none';
             finishButton.style.display = 'block';
-            totalScore += 1;
             console.log(`Total for now: ${totalScore}`);
             
         } else {
-            resultElement.textContent = "Wrong, please, try again next time";
-            resultElement.style.color = "red";
-            resultElement.style.fontWeight = '800';
-            resultElement.style.fontSize = '18px';
-            submitAndCheckButton.style.display = 'none';
+            isWrong(resultElement);
+            nextButton.style.display = 'none';
+            finishButton.style.display = 'block';
         }
     }
 }
 
-
 function nextQuestion() {
     console.log('Changing questions');
-    result.textContent = '';
+    resultElement.textContent = '';
 
-    if (question1.style.display === 'flex' || question1.style.display === '') {
-        question1.style.display = 'none';
-        question2.style.display = 'flex';
-        question3.style.display = 'none';
-        question4.style.display = 'none';
-        questionNumberElement.textContent = 'Question 2';
-        nextButton.style.display = 'none';
-        submitAndCheckButton.style.display = 'block';
+    const questions = [question1, question2, question3, question4];
 
-    } 
-    else if (question2.style.display === 'flex') {
-        question1.style.display = 'none';
-        question2.style.display = 'none';
-        question3.style.display = 'flex';
-        question4.style.display = 'none';
-        questionNumberElement.textContent = 'Question 3';
+    questions[currentQuestionIndex].style.display = 'none';
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        questions[currentQuestionIndex].style.display = 'flex';
+        questionNumber.textContent = `Question ` + (currentQuestionIndex + 1)
         nextButton.style.display = 'none';
         submitAndCheckButton.style.display = 'block';
-    }
-    else if (question3.style.display === 'flex') {
-        question1.style.display = 'none';
-        question2.style.display = 'none';
-        question3.style.display = 'none';
-        question4.style.display = 'flex';
-        questionNumberElement.textContent = 'Question 4';
+    } else {
         nextButton.style.display = 'none';
-        submitAndCheckButton.style.display = 'block';
+        submitAndCheckButton.style.display = 'none';
+        finishButton.style.display = 'block';
     }
 }
 
@@ -189,6 +181,7 @@ function finishTest() {
 function restartTest() {
     totalScore = 0;
     currentQuestion = null;
+    currentQuestionIndex = 0;
     const allRadioButtons = document.querySelectorAll('input[type="radio"]');
     allRadioButtons.forEach(radio => radio.checked = false);
 

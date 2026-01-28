@@ -81,13 +81,13 @@ h1, h2, h3 {
     text-align: center;
 }
 
-.testArea, .questionArea, .resultArea, .writtenAnswerQuestion, .finishTextAndScore, .finishContainer {
+.testArea, .questionArea, .result, .writtenAnswerQuestion, .finishTextAndScore, .finishContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.questionArea, .resultArea, .finishContainer {
+.questionArea, .result, .finishContainer {
     display: none;
 }
 
@@ -96,7 +96,7 @@ h1, h2, h3 {
     flex-direction: column;
 }
 
-#secondQuestion, #thirdQuestion, #fourthQuestion {
+.question {
     display: none;
 }
 
