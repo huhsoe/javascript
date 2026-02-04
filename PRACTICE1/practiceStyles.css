@@ -30,10 +30,8 @@ h1, h2, h3 {
     border-radius: 31px;
     width: 100%;
     max-width: 200px;
-    text-decoration: none;
     font-weight: 800;
     font-size: 21px;
-    text-align: center;
     margin-top: 100px;
     padding: 10px 15px;
     cursor: pointer;
@@ -46,32 +44,31 @@ h1, h2, h3 {
     border: 2px solid #15157e;
     border-radius: 11px;
     padding: 5px 10px;
-    text-decoration: none;
     font-weight: 600;
     font-size: 15px;
-    text-align: center;
     margin-top: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.questionArea .questionText {
-    width: 100vw;
-    background-color: rgba(140, 203, 255, 0.421);
+.optionsInner {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
 }
 
-.questionArea .options .optionsList .radio {
-  cursor: pointer;
-  margin: 10px;
-  accent-color: rgb(171, 171, 255);
+.radio {
+    cursor: pointer;
+    margin: 10px;
+    accent-color: rgb(171, 171, 255);
 }
 
-.questionArea .options .optionsList .questionText .underlined {
-    text-decoration-line: underline;
+.underlined {
+    text-decoration: underline;
     font-weight: bold;
 }
 
-.questionArea .writtenAnswerContainer .writtenAnswerQuestion .answerBox {
+.writtenAnswerQuestion .answerBox {
     border: 2px solid rgb(10, 10, 90);
     border-radius: 11px;
     height: 30px;
@@ -81,30 +78,24 @@ h1, h2, h3 {
     text-align: center;
 }
 
-.testArea, .questionArea, .result, .writtenAnswerQuestion, .finishTextAndScore, .finishContainer {
+.testArea, .questionArea, .finishTextAndScore, .finishContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.questionArea, .result, .finishContainer {
+.questionArea, .finishContainer {
     display: none;
-}
-
-.questionArea .options .optionsList {
-    display: flex;
-    flex-direction: column;
 }
 
 .question {
     display: none;
 }
 
-#nextQuestion, #finishButton {
+#nextButton, #finishButton {
     display: none;
 }
 
-
-.finishContainer .finishTextAndScore .finishText {
+.finishText {
     margin-bottom: 80px;
 }

@@ -1,209 +1,235 @@
+const QUESTIONS = [
+{
+id: 1,
+type: 'radio', 
+question: 'What is three-fifths of <span class="underlined">100</span>?',
+options: [
+{ text: '7', value: '0', isCorrect: false },
+{ text: '60', value: '1', isCorrect: true },
+{ text: '25', value: '0', isCorrect: false }
+],
+correctAnswer: '60'
+},
+
+{
+id: 2,
+type: 'radio',
+question: 'If x<sup>2</sup>=169, what is the value of <span class="underlined">x</span>?',
+options: [
+{ text: '338', value: '0', isCorrect: false },
+{ text: '169', value: '0', isCorrect: false },
+{ text: '13', value: '1', isCorrect: true }
+],
+correctAnswer: '13'
+},
+
+{
+id: 3,
+type: 'radio',
+question: 'What is <span class="underlined">7%</span> equal to?',
+options: [
+{ text: '0.07', value: '1', isCorrect: true },
+{ text: '0.007', value: '0', isCorrect: false },
+{ text: '0.7', value: '0', isCorrect: false }
+],
+correctAnswer: '0.07'
+},
+
+{
+id: 4,
+type: 'text',
+question: 'Cameron took 4 tests, and his scores were as follows: 100, 60, 80, and 30. <br>Cameron took another test that was scored x. <br>The mean score of the 5 tests he took is 72. <br>What is the value of x?',
+correctAnswer: '90'
+}
+];
+
 const startButton = document.getElementById('startButton');
 const testArea = document.getElementById('testArea');
 const questionArea = document.getElementById('questionArea');
+const optionsContainer = document.getElementById('optionsContainer');
 const questionNumber = document.getElementById('questionNumber');
 const submitAndCheckButton = document.getElementById('submitAndCheckButton');
 const nextButton = document.getElementById('nextButton');
 const restartButton = document.getElementById('restartButton');
 const scoreDisplay = document.getElementById('scoreDisplay');
-const question1 = document.getElementById('question1');
-const question2 = document.getElementById('question2');
-const question3 = document.getElementById('question3');
-const question4 = document.getElementById('question4');
 const resultElement = document.getElementById('result');
 const finishButton = document.getElementById('finishButton');
 const finalScore = document.getElementById('finalScore');
 const finishArea = document.getElementById('finishContainer');
 
-let totalScore = 0;
-let currentQuestion = null;
+let score = 0;
 let currentQuestionIndex = 0;
 
 startButton.addEventListener('click', startTest);
+
 submitAndCheckButton.addEventListener('click', checkAnswer);
 nextButton.addEventListener('click', nextQuestion);
 finishButton.addEventListener('click', finishTest);
 restartButton.addEventListener('click', restartTest);
 
 function startTest() {
-    console.log('Test started!');
     testArea.style.display = 'none';
     finishArea.style.display = 'none';
-    questionArea.style.display = 'flex';
-    submitAndCheckButton.style.display = 'block';
-    nextButton.style.display = 'none';
-    question1.style.display = 'flex';
-    question2.style.display = 'none';
-    question3.style.display = 'none';
-    question4.style.display = 'none';
-    questionNumber.textContent = 'Question 1';
+    questionArea.style.display = 'block';
+
+    score = 0;
+    currentQuestionIndex = 0;
+
+    renderQuestions();
+    showQuestion();
+}
+
+function renderQuestions() {
+    optionsContainer.innerHTML = '';
+
+    QUESTIONS.forEach((question) => {
+        const questionElement = document.createElement('div');
+        questionElement.id = `question` + question.id;
+        questionElement.className = 'question';
+        questionElement.style.display = 'none';
+
+        if (question.type === 'radio') {
+            let optionsHtml = '';
+
+             question.options.forEach((option) => {
+                optionsHtml += `
+                    <label class="radio">
+                        <input type="radio" name="q${question.id}" value="${option.isCorrect ? 1 : 0}">
+                        ${option.text}
+                    </label>
+                `;
+            });
+
+            questionElement.innerHTML = `
+                <h3 class="questionText">` + question.question + `</h3>
+                <div class="optionsInner">` + optionsHtml +
+                `</div>
+            `;
+
+        } else if (question.type === 'text') {
+            questionElement.innerHTML = `
+                <h3 class="questionText">` + question.question + `</h3>
+                <div class="writtenAnswerQuestion">
+                    <input type="text" class="answerBox">
+                </div>
+            `;
+        }
+
+        optionsContainer.appendChild(questionElement);
+    });
 }
 
 function checkAnswer() {
 
-   if (question1.style.display === 'flex' || question1.style.display === '') {
-        currentQuestion = question1;
-    } else if (question2.style.display === 'flex') {
-        currentQuestion = question2;
-    } else if (question3.style.display === 'flex') {
-        currentQuestion = question3;
-    } else if (question4.style.display === 'flex') {
-        currentQuestion = question4;
-    }
-    
-    if (!currentQuestion) {
-        console.error('No active question found');
-        return;
-    }
+    const question = QUESTIONS[currentQuestionIndex];
+    const questionElement = document.getElementById(`question${question.id}`);
 
-    const radioButtons = currentQuestion.querySelectorAll('input[type="radio"]');
-    let selectedValue = null;
     let isCorrect = false;
 
-    function isNotAnswered(resultElement) {
-        resultElement.textContent = "Please, answer the question";
-        resultElement.style.color = "orange";
-        resultElement.style.fontWeight = '800';
-        resultElement.style.fontSize = '18px';
-        return true; 
-    }
+    if (question.type === 'radio') {
 
-    function isRight(resultElement) {
-        resultElement.textContent = "Correct!";
-        resultElement.style.color = "green";
-        resultElement.style.fontWeight = '800';
-        resultElement.style.fontSize = '18px';
-        submitAndCheckButton.style.display = 'none';
-        totalScore = totalScore+=1;
-        return true;
-    }
+        const checked = questionElement.querySelector('input[type="radio"]:checked');
 
-    function isWrong(resultElement) {
-        resultElement.textContent = "Wrong, please, try again next time";
-        resultElement.style.color = "red";
-        resultElement.style.fontWeight = '800';
-        resultElement.style.fontSize = '18px';
-        submitAndCheckButton.style.display = 'none';
-        return true;
-    }
-    
-    if (currentQuestion !== question4) {
-        for (const radioButton of radioButtons) {
-            if (radioButton.checked) {
-                selectedValue = radioButton.value;
-                break;
-            }
-        }
-    
-        questionArea.appendChild(resultElement);
-        resultElement.style.textAlign = 'center';
-        resultElement.style.marginTop = '20px';
-
-
-        if (selectedValue === null) {
-            isNotAnswered(resultElement);
-            return;
-        } 
-        
-        isCorrect = (selectedValue === "1");
-
-        if (isCorrect) { 
-            isRight(resultElement);
-            nextButton.style.display = 'block';
-            console.log(`Total for now: ${totalScore}`);
-        } else {
-            isWrong(resultElement);
-            nextButton.style.display = 'block';
-        }
-    }
-
-    if (currentQuestion === question4) {
-        const correctAnswer = "90";
-        const userAnswer = document.getElementById('answerBox').value;
-        
-
-        if (userAnswer === '') {
-            isNotAnswered(resultElement);
+        if (!checked) {
+            showMessage('Please, answer the question', 'orange');
             return;
         }
 
-        finishButton.style.display = 'none';
-        nextButton.style.display = 'none';
-        submitAndCheckButton.style.display = 'block';
+        isCorrect = checked.value === '1';
 
-        isCorrect = (userAnswer === correctAnswer);
-        
-        if (isCorrect) {
-            isRight(resultElement);
-            nextButton.style.display = 'none';
-            finishButton.style.display = 'block';
-            console.log(`Total for now: ${totalScore}`);
-            
-        } else {
-            isWrong(resultElement);
-            nextButton.style.display = 'none';
-            finishButton.style.display = 'block';
+        questionElement.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.disabled = true;
+        });
+    }
+
+    if (question.type === 'text') {
+
+        const input = questionElement.querySelector('.answerBox');
+
+        if (!input.value.trim()) {
+            showMessage('Please, answer the question', 'orange');
+            return;
         }
+
+        isCorrect = input.value.trim() === question.correctAnswer;
+
+        input.disabled = true;
+    }
+
+    if (isCorrect) {
+        score++;
+        showMessage('Correct!', 'green');
+    } else {
+        showMessage('Wrong, please try again next time', 'red');
+    }
+
+    submitAndCheckButton.style.display = 'none';
+
+    if (currentQuestionIndex < QUESTIONS.length - 1) {
+        nextButton.style.display = 'block';
+    } else {
+        finishButton.style.display = 'block';
+    }
+
+}
+
+function showQuestion() {
+
+    document.querySelectorAll('.question').forEach(q => {
+        q.style.display = 'none';
+    });
+
+    const currentQuestion = QUESTIONS[currentQuestionIndex];
+    const questionElement = document.getElementById(`question` + currentQuestion.id);
+
+    questionElement.style.display = 'flex';
+
+    questionNumber.textContent = `Question ` + (currentQuestionIndex + 1);
+
+    submitAndCheckButton.style.display = 'block';
+    nextButton.style.display = 'none';
+    finishButton.style.display = 'none';
+
+    resultElement.textContent = '';
+
+    const radios = questionElement.querySelectorAll('input[type="radio"]');
+    radios.forEach(input => {
+        input.disabled = false;
+        input.checked = false;
+    });
+
+    const textInput = questionElement.querySelector('.answerBox');
+    if (textInput) {
+        textInput.disabled = false;
+        textInput.value = '';
     }
 }
 
+
 function nextQuestion() {
-    console.log('Changing questions');
-    resultElement.textContent = '';
-
-    const questions = [question1, question2, question3, question4];
-
-    questions[currentQuestionIndex].style.display = 'none';
     currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        questions[currentQuestionIndex].style.display = 'flex';
-        questionNumber.textContent = `Question ` + (currentQuestionIndex + 1)
-        nextButton.style.display = 'none';
-        submitAndCheckButton.style.display = 'block';
-    } else {
-        nextButton.style.display = 'none';
-        submitAndCheckButton.style.display = 'none';
-        finishButton.style.display = 'block';
-    }
+    showQuestion();
 }
 
 function finishTest() {
-    testArea.style.display = 'none';
     questionArea.style.display = 'none';
     finishArea.style.display = 'flex';
-    restartButton.style.display = 'block';
-    finalScore.textContent = totalScore + '/4';
-    finalScore.style.fontSize = '35px';
-    finalScore.style.fontWeight = '800';
-    finalScore.style.color = 'green';
+    finalScore.textContent = `${score} / ${QUESTIONS.length}`;
 }
 
 function restartTest() {
-    totalScore = 0;
-    currentQuestion = null;
+    optionsContainer.innerHTML = '';
+
+    score = 0;
     currentQuestionIndex = 0;
-    const allRadioButtons = document.querySelectorAll('input[type="radio"]');
-    allRadioButtons.forEach(radio => radio.checked = false);
 
-    const answerBox = document.getElementById('answerBox');
-    if (answerBox) answerBox.value = '';
-
+    testArea.style.display = 'flex';
     questionArea.style.display = 'none';
     finishArea.style.display = 'none';
+}
 
-    submitAndCheckButton.style.display = 'none';
-    nextButton.style.display = 'none';
-    finishButton.style.display = 'none';
-    
-    testArea.style.display = 'flex';
-    startButton.style.display = 'block';
-
-    const resultElement = document.getElementById('result');
-    resultElement.textContent = '';
-
-    if (scoreDisplay) scoreDisplay.style.display = null;
-    currentQuestion = question1;
-    
-    console.log('Тест сброшен. Счет: 0');
-
+function showMessage(text, color) {
+    resultElement.textContent = text;
+    resultElement.style.color = color;
+    resultElement.style.fontWeight = '800';
 }
