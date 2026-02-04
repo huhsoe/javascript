@@ -38,6 +38,12 @@ h1, h2, h3 {
     transition: all 0.3s ease;
 }
 
+.questionArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
 .questionArea .buttonSmall {
     background-color: rgba(226, 226, 226, 0.586);
     color: #15157e;
@@ -46,9 +52,12 @@ h1, h2, h3 {
     padding: 5px 10px;
     font-weight: 600;
     font-size: 15px;
-    margin-top: 15px;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
     cursor: pointer;
     transition: all 0.3s ease;
+    align-self: center;
 }
 
 .optionsInner {
@@ -90,6 +99,14 @@ h1, h2, h3 {
 
 .question {
     display: none;
+}
+
+.question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    justify-content: space-between;
+    min-height: 220px;       
 }
 
 #nextButton, #finishButton {

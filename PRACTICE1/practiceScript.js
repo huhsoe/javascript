@@ -215,6 +215,7 @@ function finishTest() {
     questionArea.style.display = 'none';
     finishArea.style.display = 'flex';
     finalScore.textContent = `${score} / ${QUESTIONS.length}`;
+    finalScore.style.fontSize = '30px';
 }
 
 function restartTest() {
